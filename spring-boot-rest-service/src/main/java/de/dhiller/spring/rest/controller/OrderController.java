@@ -43,12 +43,9 @@ public class OrderController {
         return "order";
     }
 
-    @RequestMapping(value = "/orders/{orderId:\\d+}", method = RequestMethod.POST)
-    public String addPosition(@PathVariable("orderId") int orderId, @RequestBody HashMap<String, String> formData, Model model) {
+    @RequestMapping(value = "/orders/{orderId:\\d+}", method = RequestMethod.POST, params = "orderPosition")
+    public String addPosition(@PathVariable("orderId") int orderId, OrderPosition orderPosition, Model model) {
         Order order = orders.get(orderId);
-        OrderPosition orderPosition = new OrderPosition();
-        String itemId = formData.get("itemId");
-        orderPosition.setItem(ItemController.ITEMS.get(Integer.valueOf(itemId)));
         order.getOrderPositionList().add(orderPosition);
         model.addAttribute("oder", order);
         return "order";

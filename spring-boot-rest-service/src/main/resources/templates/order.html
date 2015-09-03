@@ -6,9 +6,23 @@
 </head>
 <body>
 <h1>Order</h1>
-<form action="#" th:action="@{/}" th:object="${orderposition}" method="post">
-    <p>Id: <input type="text" th:field="*{id}" /></p>
-    <p>Message: <input type="text" th:field="*{content}" /></p>
+<table>
+    <tr th:each="orderPosition : ${order.orderPositionList}">
+        <td>Item:</td>
+        <td th:text="${orderPosition.item.name}"></td>
+        <td>Quantity:</td>
+        <td th:text="${orderPosition.quantity}">1</td>
+    </tr>
+</table>
+<form action="#" th:action="@{/orders/{orderId}(orderId=${order.id})}" th:object="${orderPosition}" method="post">
+    <p>Item:
+        <select th:field="*{orderPosition.item}">
+            <option th:each="item : ${items}"
+                    th:value="${item}"
+                    th:text="#{${item.name}}">Wireframe</option>
+        </select>
+    </p>
+    <p>Quantity: <input type="text" th:field="*{quantity}" /></p>
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 </form>
 </body>

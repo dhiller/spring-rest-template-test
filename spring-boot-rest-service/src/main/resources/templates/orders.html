@@ -13,7 +13,7 @@
         <td th:text="${order.key}">Onions</td>
         <td>Positions:</td>
         <td>
-            <a th:href="@{/order/{orderId}(orderId=${order.key})}">Edit</a>
+            <a th:href="@{/orders/{orderId}(orderId=${order.key})}">Edit</a>
             <table>
                 <tr th:each="orderPosition : ${order.value.orderPositionList}">
                     <td>Item:</td>
